@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:53:55 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/16 17:50:07 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:14:59 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,45 +41,14 @@ void	*reaping(void *arg)
 	return (0);
 }
 
-// void	reaping(t_rules *rules)
-// {
-// 	// t_rules	*rules;
-// 	int		i;
-
-// 	// rules = (t_rules *)arg;
-// 	i = 0;
-// 	while (1)
-// 	{
-// 		pthread_mutex_lock(&rules->mute_time);
-// 		if ((init_time() - rules->start_time) - rules->philo[i].last_eat
-// 			> rules->tm_to_die)
-// 		{
-// 			// pthread_mutex_lock(&rules->mute_write);
-// 			// printf("%ld %d is dead\n", (init_time() - rules->start_time),
-// 			// 	rules->philo[i].id);
-// 			// pthread_mutex_unlock(&rules->mute_write);
-// 			print_output(rules->philo, DTH);
-// 			pthread_mutex_lock(&rules->mute_death);
-// 			rules->dth_flag = true;
-// 			pthread_mutex_unlock(&rules->mute_death);
-// 			break ;
-// 		}
-// 		pthread_mutex_unlock(&rules->mute_time);
-// 		i = (i + 1) % rules->nb_philo;
-// 	}
-// 	close_threads(rules);
-// 	return ;
-// }
-
 void	*feasting(void *arg)
 {
-	t_rules	*rules;
-	int		i;
-	int		j;
+	t_rules		*rules;
+	int			i;
+	static int	j = 0;
 
 	rules = (t_rules *)arg;
 	i = 0;
-	j = 0;
 	while (rules->dth_flag == false)
 	{
 		pthread_mutex_lock(&rules->mute_eat);

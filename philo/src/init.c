@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:53:51 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/16 17:30:14 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:10:49 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	init_thread(t_rules *rules)
 		pthread_create(&rules->death_watch, NULL, reaping, (void *)rules);
 		return ;
 	}
-	// close_threads(rules);
 }
 
 time_t	init_time(void)
