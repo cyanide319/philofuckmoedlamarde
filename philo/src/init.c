@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:53:51 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 15:11:12 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:36:47 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_thread(t_rules *rules)
 	{
 		pthread_create(&rules->philo[i].p_t, NULL,
 			routine, &rules->philo[i]);
+		usleep(100);
 	}
 	pthread_create(&rules->death_watch, NULL, reaping, (void *)rules);
 	if (rules->eat_flag == true)

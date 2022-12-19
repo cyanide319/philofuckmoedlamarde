@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:53:55 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 15:52:24 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:38:50 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = arg;
-	if (philo->id % 2 == 0)
-		usleep (200);
 	while (check_dead(philo->rules) == false)
 	{
 		if (eat(philo) == false)

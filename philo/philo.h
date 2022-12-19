@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:46:06 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 15:06:19 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:42:50 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,10 @@ t_bool	fucking_sleep(t_philo *philo);
 t_bool	think(t_philo *philo);
 t_bool	print_output(t_philo *philo, char *str);
 t_bool	double_unlock_pas_propre(t_philo *philo);
+t_bool	check_dead(t_rules *rules);
 
 //The End
-void	death_wheel(t_rules *rules);
 void	close_threads(t_rules *rules);
+void	close_1_thread(t_rules *rules);
 
 #endif
