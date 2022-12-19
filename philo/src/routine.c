@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:53:55 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 15:26:35 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:52:24 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,13 @@ void	*reaping(void *arg)
 
 	rules = (t_rules *)arg;
 	i = 0;
-	while (1)
+	while (check_dead(rules) == false)
 	{
 		pthread_mutex_lock(&rules->mute_time);
 		if ((init_time() - rules->start_time) - rules->philo[i].last_eat
 			> rules->tm_to_die)
 		{
 			pthread_mutex_lock(&rules->mute_death);
-			if (rules->dth_flag == true)
-				return (0);
 			rules->dth_flag = true;
 			pthread_mutex_unlock(&rules->mute_death);
 			printf("%ld %d is dead\n", (init_time() - rules->start_time),
@@ -60,7 +58,7 @@ void	*feasting(void *arg)
 
 	rules = (t_rules *)arg;
 	i = 0;
-	while (1)
+	while (check_dead(rules) == false)
 	{
 		pthread_mutex_lock(&rules->mute_eat);
 		if (rules->philo[i].nb_eat == rules->nb_of_eat)
@@ -88,7 +86,7 @@ void	*routine(void *arg)
 	philo = arg;
 	if (philo->id % 2 == 0)
 		usleep (200);
-	while (1)
+	while (check_dead(philo->rules) == false)
 	{
 		if (eat(philo) == false)
 			return (0);
