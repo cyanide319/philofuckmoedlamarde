@@ -6,11 +6,23 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:53:55 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/16 18:14:59 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:26:35 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+t_bool	check_dead(t_rules *rules)
+{
+	pthread_mutex_lock(&rules->mute_death);
+	if (rules->dth_flag == true)
+	{
+		pthread_mutex_unlock(&rules->mute_death);
+		return (true);
+	}
+	pthread_mutex_unlock(&rules->mute_death);
+	return (false);
+}
 
 void	*reaping(void *arg)
 {
@@ -21,19 +33,18 @@ void	*reaping(void *arg)
 	i = 0;
 	while (1)
 	{
-		pthread_mutex_lock(&rules->mute_death);
-		if (rules->dth_flag == true)
-			break ;
-		pthread_mutex_unlock(&rules->mute_death);
 		pthread_mutex_lock(&rules->mute_time);
 		if ((init_time() - rules->start_time) - rules->philo[i].last_eat
 			> rules->tm_to_die)
 		{
-			print_output(rules->philo, DTH);
 			pthread_mutex_lock(&rules->mute_death);
+			if (rules->dth_flag == true)
+				return (0);
 			rules->dth_flag = true;
 			pthread_mutex_unlock(&rules->mute_death);
-			break ;
+			printf("%ld %d is dead\n", (init_time() - rules->start_time),
+				rules->philo[i].id);
+			return (0);
 		}
 		pthread_mutex_unlock(&rules->mute_time);
 		i = (i + 1) % rules->nb_philo;
@@ -49,7 +60,7 @@ void	*feasting(void *arg)
 
 	rules = (t_rules *)arg;
 	i = 0;
-	while (rules->dth_flag == false)
+	while (1)
 	{
 		pthread_mutex_lock(&rules->mute_eat);
 		if (rules->philo[i].nb_eat == rules->nb_of_eat)
@@ -63,7 +74,7 @@ void	*feasting(void *arg)
 			pthread_mutex_lock(&rules->mute_write);
 			printf("Fuckers are full.\n");
 			pthread_mutex_unlock(&rules->mute_write);
-			break ;
+			return (0);
 		}
 		i = (i + 1) % rules->nb_philo;
 	}
@@ -80,11 +91,11 @@ void	*routine(void *arg)
 	while (1)
 	{
 		if (eat(philo) == false)
-			break ;
+			return (0);
 		if (fucking_sleep(philo) == false)
-			break ;
+			return (0);
 		if (think(philo) == false)
-			break ;
+			return (0);
 	}
 	return (0);
 }
