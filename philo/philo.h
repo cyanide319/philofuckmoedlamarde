@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:46:06 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 16:42:50 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:29:07 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # define EAT "is eating"
 # define SLP "is sleeping"
 # define THK "is thinking"
-# define DTH "is dead"
-# define FLL "Fuckers are full."
 
 typedef enum e_bool{
 	false,
@@ -89,7 +87,6 @@ void	init_wait_time(t_rules *rules, int wait);
 //routine
 void	*routine(void *arg);
 void	*reaping(void *arg);
-// void	reaping(t_rules *rules);
 void	*feasting(void *arg);
 void	*one_philo_fuck_it(void *arg);
 t_bool	eat(t_philo *philo);

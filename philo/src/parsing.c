@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:52:11 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/16 15:03:23 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:25:55 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_bool	check_len(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (i == 4)
+		if (i == 6)
 			return (false);
 		i++;
 	}

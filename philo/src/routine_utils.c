@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:57:50 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 15:05:19 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:27:08 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ t_bool	print_output(t_philo *philo, char *str)
 		philo->id, str);
 	pthread_mutex_unlock(&philo->rules->mute_write);
 	return (true);
+}
+
+t_bool	double_unlock_pas_propre(t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.left]);
+	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.right]);
+	return (false);
 }
 
 t_bool	eat(t_philo *philo)
@@ -52,13 +59,6 @@ t_bool	eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.left]);
 	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.right]);
 	return (true);
-}
-
-t_bool	double_unlock_pas_propre(t_philo *philo)
-{
-	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.left]);
-	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.right]);
-	return (false);
 }
 
 t_bool	fucking_sleep(t_philo *philo)

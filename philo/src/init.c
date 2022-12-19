@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:53:51 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 16:36:47 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:22:48 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,5 @@ t_bool	init_rules(t_rules	*rules, int argc, char **argv)
 		return (error_quit(4));
 	if (pthread_mutex_init(&rules->mute_eat, NULL) != 0)
 		return (error_quit(4));
-	init_philo(rules);
-	return (true);
+	return (init_philo(rules));
 }
