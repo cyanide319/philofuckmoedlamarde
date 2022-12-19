@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:57:50 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 18:27:08 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:38:23 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ t_bool	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->rules->mute_time);
 	philo->last_eat = init_time() - philo->rules->start_time;
 	pthread_mutex_unlock(&philo->rules->mute_time);
-	pthread_mutex_lock(&philo->rules->mute_eat);
-	philo->nb_eat++;
-	pthread_mutex_unlock(&philo->rules->mute_eat);
 	if (print_output(philo, EAT) == false)
 		return (double_unlock_pas_propre(philo));
 	init_wait_time(philo->rules, philo->rules->tm_to_eat);
+	pthread_mutex_lock(&philo->rules->mute_eat);
+	philo->nb_eat++;
+	pthread_mutex_unlock(&philo->rules->mute_eat);
 	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.left]);
 	pthread_mutex_unlock(&philo->rules->mute_forks[philo->forks.right]);
 	return (true);
