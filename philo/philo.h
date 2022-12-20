@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:46:06 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 18:29:07 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:59:22 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_rules{
 	int				nb_of_eat;
 	t_bool			eat_flag;
 	t_bool			dth_flag;
-	t_bool			fll_flag;
 	pthread_t		death_watch;
 	pthread_t		weight_watcher;
 	time_t			start_time;

@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:53:55 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 18:37:40 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 21:29:54 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ void	*reaping(void *arg)
 			pthread_mutex_lock(&rules->mute_death);
 			rules->dth_flag = true;
 			pthread_mutex_unlock(&rules->mute_death);
+			pthread_mutex_lock(&rules->mute_write);
 			printf("%ld %d is dead\n", (init_time() - rules->start_time),
 				rules->philo[i].id);
+			pthread_mutex_unlock(&rules->mute_write);
+			pthread_mutex_unlock(&rules->mute_time);
 			return (0);
 		}
 		pthread_mutex_unlock(&rules->mute_time);

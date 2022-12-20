@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:53:51 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 18:39:29 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/19 20:59:11 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	init_thread(t_rules *rules)
 	int	i;
 
 	i = -1;
-	rules->fll_flag = false;
 	while (++i < rules->nb_philo)
 	{
 		pthread_create(&rules->philo[i].p_t, NULL,
@@ -91,13 +90,10 @@ t_bool	init_rules(t_rules	*rules, int argc, char **argv)
 	else
 		rules->eat_flag = false;
 	rules->start_time = init_time();
-	if (pthread_mutex_init(&rules->mute_write, NULL) != 0)
-		return (error_quit(4));
-	if (pthread_mutex_init(&rules->mute_death, NULL) != 0)
-		return (error_quit(4));
-	if (pthread_mutex_init(&rules->mute_time, NULL) != 0)
-		return (error_quit(4));
-	if (pthread_mutex_init(&rules->mute_eat, NULL) != 0)
+	if (pthread_mutex_init(&rules->mute_write, NULL) != 0
+		|| pthread_mutex_init(&rules->mute_death, NULL) != 0
+		|| pthread_mutex_init(&rules->mute_time, NULL) != 0
+		|| pthread_mutex_init(&rules->mute_eat, NULL) != 0)
 		return (error_quit(4));
 	return (init_philo(rules));
 }
