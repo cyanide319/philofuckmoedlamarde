@@ -6,7 +6,7 @@
 /*   By: tbeaudoi <tbeaudoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 13:46:06 by tbeaudoi          #+#    #+#             */
-/*   Updated: 2022/12/19 20:59:22 by tbeaudoi         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:43:36 by tbeaudoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define PHILO_H
 
 # include<stdio.h>
-# include<stdlib.h>
 # include<pthread.h>
-# include<time.h>
 # include<sys/time.h>
 # include<unistd.h>
 # include<limits.h>
@@ -28,8 +26,8 @@
 # define THK "is thinking"
 
 typedef enum e_bool{
-	false,
 	true,
+	false,
 }t_bool;
 
 typedef struct s_forks{
